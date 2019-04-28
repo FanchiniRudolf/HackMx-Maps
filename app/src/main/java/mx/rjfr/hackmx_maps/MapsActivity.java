@@ -77,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
              public void onClick(View view) {
                 destination = edtPlace.getText().toString();
                 destination = destination.replace(" ","+");
+                destination = destination.replace("\n","+");
                 mapFragment.getMapAsync(MapsActivity.this);
             }
         });
@@ -99,7 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setTrafficEnabled(false);
         mMap.setIndoorEnabled(false);
         mMap.setBuildingsEnabled(false);
@@ -216,7 +217,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                          lat = v*endPosition.latitude+(1-v)
                                                  *startPosition.latitude;
 
-                                         System.out.println("Desea buscar lugar?");
+                                         if (index== polyLineList.size()-polyLineList.size()/2){
+                                             System.out.println("Desea un nuevo lugar?");
+                                             //si, pop up
+                                         }
 
 
                                          LatLng newPos = new LatLng(lat, lng);
