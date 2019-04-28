@@ -1,6 +1,7 @@
 package mx.rjfr.hackmx_maps;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -58,6 +59,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private PolylineOptions polylineOptions, blackPolylineOptions;
     private Polyline blackPolyLine, greyPolyLine;
     IGoogleApi mService;
+    private boolean preguntado = false;
+
+    public static boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public static boolean accepted = false;
 
 
     @Override
@@ -217,9 +229,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                          lat = v*endPosition.latitude+(1-v)
                                                  *startPosition.latitude;
 
-                                         if (index== polyLineList.size()-polyLineList.size()/2){
+                                         if (index== polyLineList.size()-polyLineList.size()/2 && preguntado == false){
+                                             preguntado = true;
                                              System.out.println("Desea un nuevo lugar?");
                                              //si, pop up
+                                             startActivity(new Intent(MapsActivity.this,Pop.class  ));
+                                             if (accepted == true) {
+                                                 final LatLng TecCem = new LatLng(startPosition.latitude, startPosition.longitude);
+                                                 destination = "\n" +
+                                                         "Calle Matamoros 1\n" +
+                                                         "Margarita Maza de Juárez\n" +
+                                                         "52926 Cd López Mateos, Méx. ";
+
+                                                 destination = destination.replace(" ", "+");
+                                                 destination = destination.replace("\n", "+");
+                                                 mapFragment.getMapAsync(MapsActivity.this);
+                                             }
                                          }
 
 

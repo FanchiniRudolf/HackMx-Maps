@@ -2,4 +2,6 @@
     <string name="app_name">HackMx-Maps</string>
     <string name="title_activity_maps">Map</string>
     <string name="google_directions_key">AIzaSyBvK9HZ7-m_EVfm7hmb0yySL9-M7HouRQ8</string>
+    <string name="search_for_more_parkin_spots">Search for more parkin spots</string>
+    <string name="cancel">Cancel</string>
 </resources>
